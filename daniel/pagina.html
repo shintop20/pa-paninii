@@ -1,0 +1,200 @@
+<index class="html"><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Para ti, Daniel! 💖</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <div class="container">
+        
+       <img id="chiikawaPrincipal" src="chiikawa_saludo.png" alt="Hellooo, Daniel!" class="chiikawa-image" onclick="revelarMensaje()">
+        
+        <div id="saludoInicial" class="message-box">
+            <h1>¡Hola, Daniel!</h1>
+        </div>
+        
+        <div id="mensajeSecreto" class="secreto">
+            <h2>¡Helloo, Daniel!</h2>
+            <p>¿Quieres jugar conmigo?</p>
+            <div class="botones-jugar">
+                <button class="boton-jugar" onclick="manejarRespuesta('si')">Sí, ¡quiero jugar!</button>
+                <button class="boton-jugar boton-no" onclick="manejarRespuesta('no')">No, gracias.</button>
+            </div>
+        </div>
+
+        <div id="mensajeFinal" class="final-message">
+            <h2 id="tituloFinal"></h2>
+            <p id="textoFinal"></p>
+        </div>
+    </div> 
+
+    <script>
+        // Referencias a los elementos del DOM
+        const chiikawaPrincipal = document.getElementById('chiikawaPrincipal');
+        const saludoInicial = document.getElementById('saludoInicial');
+        const mensajeSecreto = document.getElementById('mensajeSecreto');
+        const mensajeFinal = document.getElementById('mensajeFinal');
+        const tituloFinal = document.getElementById('tituloFinal');
+        const textoFinal = document.getElementById('textoFinal');
+
+        // 1. Función para revelar la pregunta al hacer clic en Chiikawa
+        function revelarMensaje() {
+            saludoInicial.style.display = 'none'; // Oculta el saludo
+            mensajeSecreto.style.display = 'block'; // Muestra la pregunta
+        }
+
+        // 2. Función que maneja la respuesta de los botones
+        function manejarRespuesta(respuesta) {
+            mensajeSecreto.style.display = 'none'; // Oculta la pregunta y los botones
+            mensajeFinal.style.display = 'block'; // Muestra el mensaje de resultado
+            
+            // Efecto de desvanecimiento suave para el cambio de imagen
+            chiikawaPrincipal.style.opacity = '0'; 
+
+            setTimeout(() => {
+                if (respuesta === 'si') {
+                    // Si dice 'Sí', Chiikawa con flores 🌸
+                    chiikawaPrincipal.src = 'chiikawa_flores.png'; 
+                    tituloFinal.textContent = '¡Así me gusta!';
+                    textoFinal.textContent = '¡Unas flores para ti!';
+                } else { 
+                    // Si dice 'No', Chiikawa llorando 😭
+                    chiikawaPrincipal.src = 'chiikawa_llorando.png'; 
+                    tituloFinal.textContent = 'Ohhh...';
+                    textoFinal.textContent = 'Chiikawa está un poco triste pero será otro día.';
+                }
+                
+                // Vuelve a mostrar la imagen ya cambiada
+                chiikawaPrincipal.style.opacity = '1'; 
+            }, 300); 
+        }
+    </script> 
+
+</body>
+</html><style class="css">body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fce4ec; /* Fondo rosa claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    text-align: center;
+}
+
+.container {
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4); 
+    max-width: 450px; 
+    width: 90%;
+}
+
+/* IMAGEN PRINCIPAL */
+.chiikawa-image {
+    width: 255px; 
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto; 
+    transition: transform 0.5s ease, opacity 0.3s ease; /* Para que el cambio de imagen sea suave */
+    cursor: pointer; 
+}
+
+.chiikawa-image:hover {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+/* --- ESTILO DE LAS CAJAS DE MENSAJE --- */
+
+/* Saludo Inicial */
+.message-box {
+    position: relative; 
+    background: #ffecb3; 
+    border-radius: .8em;
+    padding: 10px 20px;
+    margin-top: 15px;
+}
+
+/* Punta del globo de diálogo */
+.message-box:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top-color: #ffecb3;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -7.5px;
+    margin-bottom: -15px;
+}
+.message-box h1 {
+    color: #5d4037; 
+    font-size: 2.5em; 
+    margin: 0;
+}
+
+/* Mensaje Secreto y Final (Ocultos al inicio) */
+.secreto, .final-message {
+    display: none; 
+    background-color: #ffe082; 
+    color: #3e2723;
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 2px solid #ffb74d;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-out;
+}
+
+.secreto h2, .final-message h2 {
+    color: #d81b60; 
+    margin-top: 0;
+    font-size: 1.8em;
+}
+
+/* --- ESTILO DE BOTONES --- */
+
+.botones-jugar {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px; 
+    margin-top: 20px;
+}
+
+.boton-jugar {
+    flex-grow: 1; 
+    padding: 10px 15px;
+    background-color: #ff6f91; /* Botón Sí: Rosa */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-jugar:hover {
+    background-color: #e65a7d;
+}
+
+.boton-no {
+    background-color: #8d6e63; /* Botón No: Marrón suave */
+}
+
+.boton-no:hover {
+    background-color: #795548;
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}</style></index>
